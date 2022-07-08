@@ -20,25 +20,29 @@ export const Todo = () => {
     return (
    
     <div className='row mt-5'>
-        <div className='col-3'></div>
-            <div className='col-6'>
-                <div className='Card border-dark'>
+        <h1 id="ti">ToDo List</h1>
+        <div className='col-4'>
+        <div className='card-text border-dark mt-3'>
                     <div className="form-floating mb-3">
                         <input onChange={handlerTask} value={task} onKeyDown={handlerKeyPress} type="text" className="form-control" id="floatingInput" placeholder="Tarea por hacer"/>
-                        <label for="floatingInput">Tarea por hacer</label>
+                        <label id="f1" for="floatingInput"> Agrega una Tarea</label>
                     </div>
                 </div>
+                </div>
+            <div className='col-5'>
+        
                     {tasklist.map((tarea , i)=>{
                     return ( 
 
                         <div className='Card card m-1' key={i}>
-                            <div className="modal-header">                             
-                                <h4 className="modal-title" >{tarea}
-                                    <button type="button" className="btn-close btn-danger" onClick={(event) => handlerButtomDelete(i)}></button>
-                                </h4>
-                                
-                            </div>
+                        <div className="modal-header justify-content-between">                             
+                            <h4>{i+1}. {tarea}</h4>
+                            <button type="button" className="btn-close " onClick={(event) => handlerButtomDelete(i)}></button>
                         </div>
+                    </div>
+
+
+                      
                            );
                            })}
                 
