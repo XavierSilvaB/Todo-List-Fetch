@@ -9,15 +9,18 @@ export const Todo = () => {
     const handlerTask = (event) => { setTask(event.target.value)}
    
     const handlerKeyPress = (event) => {
-        // event.preventDefault();
         if (event.key == 'Enter' && task != "") {
                 setTasklist([...tasklist, task]);
                 setTask("");
         }
     }
     const handlerButtomDelete = (indexid) => setTasklist(tasklist.filter((tarea , index)=> (index != indexid)))
-            
-    return (
+    
+    const handlerDelete = () =>
+        {
+            setTasklist(tasklist.length = [])
+        }     
+        return (
    
     <div className='row mt-5'>
         <h1 id="ti">ToDo List</h1>
@@ -27,27 +30,26 @@ export const Todo = () => {
                         <input onChange={handlerTask} value={task} onKeyDown={handlerKeyPress} type="text" className="form-control" id="floatingInput" placeholder="Tarea por hacer"/>
                         <label id="f1" for="floatingInput"> Agrega una Tarea</label>
                     </div>
+                    <div className="row text-muted">
+				        <p>{tasklist.length} tareas pendientes</p>
+			        </div>
                 </div>
                 </div>
             <div className='col-5'>
-        
                     {tasklist.map((tarea , i)=>{
                     return ( 
-
                         <div className='Card card m-1' key={i}>
                         <div className="modal-header justify-content-between">                             
                             <h4>{i+1}. {tarea}</h4>
                             <button type="button" className="btn-close " onClick={(event) => handlerButtomDelete(i)}></button>
                         </div>
-                    </div>
-
-
-                      
+                    </div>                    
                            );
                            })}
-                
             </div>
-        <div className='col-3'></div>
+        <div className='col-3'>
+            <button type="button" class="btn btn-danger btn-lg" onClick={(event) => handlerDelete()}>Elimina todas las Tareas</button>
+        </div>
     </div>
   )
 }
