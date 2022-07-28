@@ -6,6 +6,24 @@ export const Todo = () => {
     const [tasklist , setTasklist] = useState([]);
     const [task , setTask] = useState("");
 
+
+    const mensaje2 = () =>{
+        if(tasklist.length == 0){
+            return "No hay tareas pendientes"
+        }
+        else{
+            return `${tasklist.length} tareas pendientes`
+        }
+    }
+
+    const mensaje = () =>{
+        if(tasklist.length == 0){
+            return "No hay tareas para mostrar"
+        }
+        else{
+            return "Eliminar todas las Tareas"
+        }
+    }
     const handlerTask = (event) => { setTask(event.target.value)}
    
     const handlerKeyPress = (event) => {
@@ -23,7 +41,7 @@ export const Todo = () => {
         return (
    
     <div className='row mt-5'>
-        <h1 id="ti">ToDo List</h1>
+        <h1 id="ti">To do list</h1>
         <div className='col-4'>
         <div className='card-text border-dark mt-3'>
                     <div className="form-floating mb-3">
@@ -31,7 +49,7 @@ export const Todo = () => {
                         <label id="f1" for="floatingInput"> Agrega una Tarea</label>
                     </div>
                     <div className="row text-muted">
-				        <p>{tasklist.length} tareas pendientes</p>
+				        <h5>{mensaje2()}</h5>
 			        </div>
                 </div>
                 </div>
@@ -48,7 +66,7 @@ export const Todo = () => {
                            })}
             </div>
         <div className='col-3'>
-            <button type="button" class="btn btn-danger btn-lg" onClick={(event) => handlerDelete()}>Elimina todas las Tareas</button>
+            <button type="button" class="btn btn-danger btn-lg" onClick={(event) => handlerDelete()}>{mensaje()}</button>
         </div>
     </div>
   )

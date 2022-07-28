@@ -3,19 +3,18 @@ border-color: black;
 }
 
 #div1{
-    background: linear-gradient(to bottom, orange, white);
+    background: linear-gradient(to bottom,#63C5DB,#4ABCAD, #F8B935, #F8D32C);
 height: 100vh;
 }
 
 #f1{
-    font-family: 'Edu TAS Beginner', cursive;
+    font-family: 'Helvetica', cursive;
 }
 
 #ti{
-    -webkit-text-stroke: 3px black;
     font-size: 5vw;
-    color: white; 
+    color: #223480; 
     font-weight: 400;
-    padding: 10px;
-    font-family: 'Edu TAS Beginner', cursive;
+    padding: 8px;
+    font-family: 'Helvetica', cursive;
 }
