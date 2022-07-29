@@ -6,7 +6,6 @@ export const Todo = () => {
     const [tasklist , setTasklist] = useState([]);
     const [task , setTask] = useState("");
 
-
     const mensaje2 = () =>{
         if(tasklist.length == 0){
             return "No hay tareas pendientes"
