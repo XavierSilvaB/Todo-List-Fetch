@@ -7,29 +7,22 @@ export const Todo = () => {
     const [task , setTask] = useState("");
 
     const BURL = "https://assets.breatheco.de/apis/fake/todos/user/j3suschf";
-    const ACTZ = {
-        method: "PUT",
+    
+    const INI_POST = {
+        method: "POST",
         body: JSON.stringify(tasklist),
         headers: {
           "Content-Type": "application/json"
         }
       }
-
-    const INIT = {
-        method: "POST",
-        body: [],
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
     
-    const DEL = {
+    const DEL_DELETE = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
         }
       }
-
+        
     const mensaje2 = () =>{
         if(tasklist.length == 0){
             return "No hay tareas pendientes"
@@ -38,7 +31,6 @@ export const Todo = () => {
             return `${tasklist.length} tareas pendientes`
         }
     }
-
     const mensaje = () =>{
         if(tasklist.length == 0){
             return "No hay tareas para mostrar"
@@ -47,90 +39,96 @@ export const Todo = () => {
             return "Eliminar todas las Tareas"
         }
     }
-
-
     const handlerTask = (event) => { setTask(event.target.value)}
    
-    const handlerKeyPress = (event) => {
+    const handlerKeyPress = async (event) => {
+        
         if (event.key == 'Enter' && task != "") {
+            
+            setTasklist([...tasklist, task]);
+            
+            let newList = tasklist;     
+            
+            newList.push({
+                label: task,
+                done: false
+            });
+           
+            let response = await fetch(BURL, {
+                method: "PUT",
+                body: JSON.stringify(newList),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
 
-                setTasklist([...tasklist, task]);
+            if (response.ok) {
+                let resp = await fetch(BURL);
+                let APIList = await resp.json();
+                setTasklist(APIList);
                 setTask("");
-                
-                fetch(BURL, ACTZ )
-                  .then(resp => {
-                      
-                    console.log(resp.ok);  
-                      
-                    if(resp.status == 200){
-                        console.log(resp.status);
-                        console.log("Se actualizo con exito")
-                        return resp.json();
-                        }
-                    else{
-                        console.log(`Hubo un error ${resp.status} durante el request`)
-                        }    
-                  })
-                  .then(data => {
-                        console.log(data)                                   
-                    })
-                  .catch(error => {
-                      console.error(error);
-                  });
+            } else {
+                alert("intenta de nuevo, tienes un error");
+            }
+            
             
         }
+
     }
-
-    const handlerButtomDelete = async (indexid) => {
-
-
-        let filtertasklist = tasklist.filter((tarea , index)=> (index != indexid));
-        
-        if(filtertasklist.length > 0){
-			let response = await fetch(BURL, ACTZ);
+    
+    const handlerButtomDelete = async (indexid, actlist) => {
+        console.log(actlist);
+        const filterlist = actlist.filter((todo, index)=> index != indexid);
+     
+          if(filterlist.length > 0){
+            let response = await fetch(BURL, {
+				method: "PUT",
+				body: JSON.stringify(filterlist),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			});
 			if (response.ok) {
-				setTasklist(filtertasklist);
+				setTasklist(filterlist); 
 			} else {
-				alert("ERROR");			
-                }
+				alert("hubo un problema 1");
+			}
 		} else {
-			let response = await fetch(BURL, DEL);
+			let response = await fetch(BURL, DEL_DELETE);
 			if (response.ok) {
 				setTasklist([]);
+                console.log("la lista entera se borro con exito")
+                let createuser = await fetch(BURL , INI_POST)
+            if(createuser.ok){
+                console.log("usuario iniciado con exito");
+            }
+
 			} else {
-				alert("ERROR");
+				alert("Problema de nuevo");
 			}
 		}
-    };
-    
-    const handlerDelete = () =>
-        {
-            setTasklist(tasklist.length = [])
+        }
 
-            fetch(BURL, DEL )
-            .then(resp => {
-                
-              console.log(resp.ok);  
-                
-              if(resp.status == 200){
-                  console.log(resp.status);
-                  console.log("Se elimino con exito");
-                  return resp.json();
-                  }
-              else{
-                  console.log(`Error ${resp.status}, no se pudo borrar`);
-                  }    
-            })
-            .then(data => {})
-            .catch(error => {
-                console.error(error);
-            });
+
+    const handlerDelete = async () =>
+        {
+            setTasklist(tasklist.length = []);
+
+            let response = await fetch(BURL , DEL_DELETE);
+            
+            if(response.ok){
+                console.log("la lista se borro con exito")
+            }
+
+            let createuser = await fetch(BURL , INI_POST)
+            if(createuser.ok){
+                console.log("usuario iniciado con exito");
+            }
+
         }     
         
-        
-
-        return (
-
+return (
+   
     <div className='row mt-5'>
         <h1 id="ti">To do list</h1>
         <div className='col-4'>
@@ -150,7 +148,7 @@ export const Todo = () => {
                         <div className='Card card m-1' key={i}>
                         <div className="modal-header justify-content-between">                             
                             <h4>{i+1}. {tarea.label}</h4>
-                            <button type="button" className="btn-close " onClick={(event) => handlerButtomDelete(i)}></button>
+                            <button type="button" className="btn-close " onClick={(event) => handlerButtomDelete(i, tasklist)}></button>
                         </div>
                     </div>                    
                            );
