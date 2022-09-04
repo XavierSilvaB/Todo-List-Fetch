@@ -25,7 +25,7 @@ export const Todo = () => {
         }
       }
       
-      //Carga la lista guardada previamente o crea el usuario si no existe
+     
     const getApilist = async () =>{
 
         let resp = await fetch(BURL);
@@ -43,7 +43,7 @@ export const Todo = () => {
         return console.log("iniciado")
     }
 
-        //Mensaje para mostrar numero de tareas pendiente      
+             
     const mensaje2 = () =>{
         if(tasklist.length == 0){
             return "No hay tareas pendientes"
@@ -52,7 +52,7 @@ export const Todo = () => {
             return `${tasklist.length} tareas pendientes`
         }
     }
-        //Mensaje para mostrar en Boton Eliminar 
+        
     const mensaje = () =>{
         if(tasklist.length == 0){
             return "No hay tareas para mostrar"
@@ -61,10 +61,10 @@ export const Todo = () => {
             return `Eliminar todas las Tareas`
         }
     }
-        //Manejar cada tarea individual
+       
     const handlerTask = (event) => { setTask(event.target.value)}
    
-        //agregar tareas a la lista y cargarlas al usuario en API
+       
     const handlerKeyPress = async (event) => {
         
         if (event.key == 'Enter' && task != "") {
@@ -96,7 +96,7 @@ export const Todo = () => {
             }           
         }
     }
-        //Borrar una tarea a la vez y eliminar todo si es la ultima e inicializar el usuario
+       
     const handlerButtomDelete = async (indexid, actlist) => {
         console.log(actlist);
         const filterlist = actlist.filter((todo, index)=> index != indexid);
@@ -130,7 +130,7 @@ export const Todo = () => {
 		}
         }
 
-        //borrar todas las tareas e inicializar el usuario
+        
     const handlerDelete = async () =>
         {
             setTasklist(tasklist.length = []);
@@ -150,8 +150,7 @@ export const Todo = () => {
         
 return (
    
-    // pedir a user que ingrese un nombre para crear
-    //deberia cargar la lista al iniciar o crear el usuario si no existe
+   
     
     <div className='row '>  
         <h1 id="ti">TO-DO List with Fetch</h1>
