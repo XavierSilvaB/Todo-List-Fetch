@@ -1,20 +1,72 @@
+body{
+    background-color: black;
+    height: 100%;
+}
+
 .card{
 border-color: black;
 }
 
 #div1{
-    background: linear-gradient(to bottom,#63C5DB,#4ABCAD, #F8B935, #F8D32C);
+    background: black;
 height: 100vh;
 }
 
 #f1{
     font-family: 'Helvetica', cursive;
+    border-radius: 10px;
+    color: white;
+   
 }
 
 #ti{
     font-size: 5vw;
-    color: #223480; 
+    color: white;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
     font-weight: 400;
     padding: 8px;
     font-family: 'Helvetica', cursive;
+}
+
+.msj2{
+    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    width: 300px;
+    border-radius: 10px;
+    color: white;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+}
+
+
+.fondo{
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+}
+
+.input-tarea{
+
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    color: white;
+
+}
+
+.delete-b{
+    margin-left: 40px;
+    margin-top: 270px;
+    position: absolute;
+}
+
+.icono{
+    width: 100px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.b-close{
+    width: 10px;
+    height: 10px;
+    color: white;
+    background-color: white;
 }

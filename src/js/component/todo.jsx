@@ -8,7 +8,7 @@ export const Todo = () => {
 
     useEffect(()=>{getApilist()},[]);
 
-    const BURL = "https://assets.breatheco.de/apis/fake/todos/user/jechf";
+    const BURL = "https://assets.breatheco.de/apis/fake/todos/user/xaviersilva";
     
     const INI_POST = {
         method: "POST",
@@ -58,7 +58,7 @@ export const Todo = () => {
             return "No hay tareas para mostrar"
         }
         else{
-            return "Eliminar todas las Tareas"
+            return `Eliminar todas las Tareas`
         }
     }
         //Manejar cada tarea individual
@@ -153,33 +153,36 @@ return (
     // pedir a user que ingrese un nombre para crear
     //deberia cargar la lista al iniciar o crear el usuario si no existe
     
-    <div className='row mt-5'>  
-        <h1 id="ti">To-do list</h1>
+    <div className='row '>  
+        <h1 id="ti">TO-DO List with Fetch</h1>
         <div className='col-4'>
         <div className='card-text border-dark mt-3'>
                     <div className="form-floating mb-3">
-                        <input onChange={handlerTask} value={task} onKeyDown={handlerKeyPress} type="text" className="form-control" id="floatingInput" placeholder="Tarea por hacer"/>
+                        <input onChange={handlerTask} value={task} onKeyDown={handlerKeyPress} type="text" className="form-control bg-black" id="floatingInput" placeholder="Tarea por hacer"/>
                         <label id="f1" htmlFor="floatingInput"> Agrega una Tarea</label>
                     </div>
                     <div className="row text-muted">
-				        <h5>{mensaje2()}</h5>
+				        <h5 className='msj2 border border-info'>{mensaje2()}</h5>
 			        </div>
                 </div>
                 </div>
             <div className='col-5'>
                     {tasklist.map((tarea , i)=>{
                     return ( 
-                        <div className='Card card m-1' key={i}>
-                        <div className="modal-header justify-content-between">                             
-                            <h4>{i+1}. {tarea.label}</h4>
-                            <button type="button" className="btn-close " onClick={(event) => handlerButtomDelete(i, tasklist)}></button>
+                        <div className='Card card m-1 rounded border border-info' key={i}>
+                        <div className="input-tarea modal-header justify-content-between ">                             
+                            <h4 className='text-light'>{i+1}. {tarea.label}</h4>
+                            <button type="button" className="b-close btn-close " onClick={(event) => handlerButtomDelete(i, tasklist)}></button>
                         </div>
                     </div>                    
                            );
                            })}
             </div>
-        <div className='col-3'>
-            <button type="button" className="btn btn-danger btn-lg" onClick={(event) => handlerDelete()}>{mensaje()}</button>
+        <div className='delete-b col-3'>
+            <button type="button" className="btn btn-dark btn-lg border border-info" onClick={(event) => handlerDelete()}>{mensaje()}</button>
+        </div>
+        <div>
+            <img src="https://avatars.sched.co/5/cb/8689106/avatar.jpg?9cc" alt=""  className='icono'/>
         </div>
     </div>
   )
